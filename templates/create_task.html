@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Task{% endblock %}
+
+{% block content %}
+    <div class="cyber-form-container">
+        <h2 class="cyber-subtitle">Create New Task</h2>
+        
+        <form method="POST" class="cyber-form">
+            <div class="form-group">
+                <label for="name" class="cyber-label">Task Name</label>
+                <input type="text" id="name" name="name" class="cyber-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="description" class="cyber-label">Description</label>
+                <textarea id="description" name="description" class="cyber-textarea" rows="4"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="result" class="cyber-label">Expected Result</label>
+                <textarea id="result" name="result" class="cyber-textarea" rows="4"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="status" class="cyber-label">Status</label>
+                <select id="status" name="status" class="cyber-select" required>
+                    <option value="Новая">Новая</option>
+                    <option value="В работе">В работе</option>
+                    <option value="Тест">Тест</option>
+                    <option value="Готово">Готово</option>
+                </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="cyber-button primary">Create Task</button>
+                <a href="{{ url_for('index') }}" class="cyber-button">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

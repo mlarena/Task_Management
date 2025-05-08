@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block content %}
+    <div class="cyber-form-container">
+        <h2 class="cyber-subtitle">Edit Task</h2>
+        
+        <form method="POST" class="cyber-form">
+            <div class="form-group">
+                <label for="name" class="cyber-label">Task Name</label>
+                <input type="text" id="name" name="name" class="cyber-input" value="{{ task[1] }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="description" class="cyber-label">Description</label>
+                <textarea id="description" name="description" class="cyber-textarea" rows="4">{{ task[2] }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="result" class="cyber-label">Expected Result</label>
+                <textarea id="result" name="result" class="cyber-textarea" rows="4">{{ task[3] }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="status" class="cyber-label">Status</label>
+                <select id="status" name="status" class="cyber-select" required>
+                    <option value="Новая" {% if task[5] == 'Новая' %}selected{% endif %}>Новая</option>
+                    <option value="В работе" {% if task[5] == 'В работе' %}selected{% endif %}>В работе</option>
+                    <option value="Тест" {% if task[5] == 'Тест' %}selected{% endif %}>Тест</option>
+                    <option value="Готово" {% if task[5] == 'Готово' %}selected{% endif %}>Готово</option>
+                    <option value="Архив" {% if task[5] == 'Архив' %}selected{% endif %}>Архив</option>
+                </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="cyber-button primary">Update Task</button>
+                <a href="{{ url_for('view_task', task_id=task[0]) }}" class="cyber-button">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

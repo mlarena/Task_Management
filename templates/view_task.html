@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ task[1] }}{% endblock %}
+
+{% block content %}
+    <div class="cyber-details-container">
+        <div class="task-header">
+            <h2 class="cyber-subtitle">{{ task[1] }}</h2>
+            <span class="status-badge status-{{ task[5].replace(' ', '-')|lower }}">{{ task[5] }}</span>
+        </div>
+        
+        <div class="task-meta">
+            <p class="cyber-meta">Created: {{ task[4].strftime('%Y-%m-%d %H:%M') }}</p>
+        </div>
+        
+        <div class="task-section">
+            <h3 class="cyber-section-title">Description</h3>
+            <div class="cyber-card">
+                <p>{{ task[2] or 'No description provided' }}</p>
+            </div>
+        </div>
+        
+        <div class="task-section">
+            <h3 class="cyber-section-title">Expected Result</h3>
+            <div class="cyber-card">
+                <p>{{ task[3] or 'No expected result defined' }}</p>
+            </div>
+        </div>
+        
+        <div class="task-actions">
+            <a href="{{ url_for('edit_task', task_id=task[0]) }}" class="cyber-button edit">Edit</a>
+            {% if task[5] != 'Архив' %}
+                <form action="{{ url_for('archive_task', task_id=task[0]) }}" method="POST" class="inline-form">
+                    <button type="submit" class="cyber-button archive">Archive</button>
+                </form>
+            {% endif %}
+            <form action="{{ url_for('delete_task', task_id=task[0]) }}" method="POST" class="inline-form">
+                <button type="submit" class="cyber-button delete" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+            <a href="{{ url_for('index') }}" class="cyber-button">Back to List</a>
+        </div>
+    </div>
+{% endblock %}

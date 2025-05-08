@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="cyber-container">
+        <header class="cyber-header">
+            <h1 class="cyber-title glitch" data-text="TASK MANAGEMENT">TASK MANAGEMENT</h1>
+            <nav class="cyber-nav">
+                <a href="{{ url_for('index') }}" class="cyber-button">Active Tasks</a>
+                <a href="{{ url_for('archive') }}" class="cyber-button">Archive</a>
+                <a href="{{ url_for('create_task') }}" class="cyber-button">New Task</a>
+            </nav>
+        </header>
+
+        <div class="cyber-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="cyber-alerts">
+                        {% for category, message in messages %}
+                            <div class="cyber-alert cyber-alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer class="cyber-footer">
+            <p>© 2023 Task Management System | Cyber Future Edition</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

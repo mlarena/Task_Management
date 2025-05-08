@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+    <div class="cyber-table-container">
+        <h2 class="cyber-subtitle">{% if is_archive %}Archived Tasks{% else %}Active Tasks{% endif %}</h2>
+        
+        <table class="cyber-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr class="cyber-table-row" data-status="{{ task[5] }}">
+                        <td>{{ task[0] }}</td>
+                        <td>{{ task[1] }}</td>
+                        <td>
+                            <span class="status-badge status-{{ task[5].replace(' ', '-')|lower }}">{{ task[5] }}</span>
+                        </td>
+                        <td>{{ task[4].strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td class="actions">
+                            <a href="{{ url_for('view_task', task_id=task[0]) }}" class="cyber-button small view">View</a>
+                            <a href="{{ url_for('edit_task', task_id=task[0]) }}" class="cyber-button small edit">Edit</a>
+                            {% if not is_archive %}
+                                <form action="{{ url_for('archive_task', task_id=task[0]) }}" method="POST" class="inline-form">
+                                    <button type="submit" class="cyber-button small archive">Archive</button>
+                                </form>
+                            {% endif %}
+                            <form action="{{ url_for('delete_task', task_id=task[0]) }}" method="POST" class="inline-form">
+                                <button type="submit" class="cyber-button small delete" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="no-tasks">No tasks found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
