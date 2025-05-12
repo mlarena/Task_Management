@@ -24,7 +24,7 @@
             
             <div class="form-group">
                 <label for="status" class="cyber-label">Status</label>
-                <select id="status" name="status" class="cyber-select" required>
+                <select id="status" name="status" class="cyber-select status-select" required>
                     <option value="Новая" {% if task[5] == 'Новая' %}selected{% endif %}>Новая</option>
                     <option value="В работе" {% if task[5] == 'В работе' %}selected{% endif %}>В работе</option>
                     <option value="Тест" {% if task[5] == 'Тест' %}selected{% endif %}>Тест</option>
