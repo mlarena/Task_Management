@@ -153,18 +153,21 @@ body {
 .cyber-table-container {
     margin-bottom: 40px;
 }
-
+/* Компактная таблица в стиле Bootstrap table-sm */
 .cyber-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
     background-color: var(--background-darker);
+    font-size: 0.875rem; /* Уменьшенный размер шрифта */
 }
 
-.cyber-table th, .cyber-table td {
-    padding: 12px 15px;
+.cyber-table th, 
+.cyber-table td {
+    padding: 0.3rem 0.6rem; /* Уменьшенные отступы */
     text-align: left;
     border-bottom: 1px solid var(--border-color);
+    vertical-align: top; /* Выравнивание по верху */
 }
 
 .cyber-table th {
@@ -172,13 +175,61 @@ body {
     color: var(--primary-color);
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 0.9rem;
+    font-size: 0.75rem; /* Еще меньше для заголовков */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-.cyber-table tr:hover {
+/* Уменьшенные кнопки действий в таблице */
+.cyber-table .actions .cyber-button {
+    height: 26px; /* Уменьшенная высота */
+    min-width: 60px; /* Уменьшенная ширина */
+    padding: 0 8px;
+    font-size: 0.75rem; /* Уменьшенный размер шрифта */
+    line-height: 1.2;
+}
+
+/* Уменьшенные бейджи статусов */
+.cyber-table .status-badge {
+    padding: 0.15rem 0.4rem;
+    font-size: 0.7rem;
+    border-width: 1px;
+}
+
+/* Компактные строки */
+.cyber-table tbody tr {
+    line-height: 1.2;
+}
+
+/* Эффект при наведении */
+.cyber-table tbody tr:hover {
     background-color: rgba(0, 240, 255, 0.05);
 }
 
+/* Уменьшенные отступы для контейнера таблицы */
+.cyber-table-container {
+    margin-bottom: 1.5rem;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .cyber-table th, 
+    .cyber-table td {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    .cyber-table .actions {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    
+    .cyber-table .actions .cyber-button {
+        height: 24px;
+        min-width: 100%;
+    }
+}
 .cyber-table-row[data-status="Готово"] {
     opacity: 0.7;
 }
@@ -285,12 +336,57 @@ body {
     resize: vertical;
 }
 
+/* Стили для выпадающего списка */
 .cyber-select {
+    background-color: var(--background-darker);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    font-family: 'Roboto Mono', monospace;
+    padding: 10px 15px;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300f0ff'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 1em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cyber-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--glow);
+}
+
+/* Стили для dropdown (выпадающего меню) */
+.cyber-select option {
+    background-color: var(--background-darker);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', monospace;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Стили при наведении на option */
+.cyber-select option:hover {
+    background-color: rgba(0, 240, 255, 0.1) !important;
+    color: var(--primary-color) !important;
+}
+
+/* Стиль для выделенного option */
+.cyber-select option:checked {
+    background-color: rgba(0, 240, 255, 0.2);
+    color: var(--primary-color);
+}
+
+/* Стили для группы option */
+.cyber-select optgroup {
+    background-color: var(--background-dark);
+    color: var(--primary-color);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .form-actions {
@@ -472,4 +568,36 @@ body {
 .inline-form .cyber-button {
     height: 32px;
     padding: 0 12px;
+}
+
+
+
+/* Для кнопок в формах */
+.form-actions .cyber-button,
+.task-actions .cyber-button {
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px; /* Минимальная ширина для кнопок в формах */
+    padding: 0 15px;
+}
+
+/* Специальные стили для кнопки "Back to List" */
+.task-actions .cyber-button:last-child {
+    margin-left: auto; /* Выравнивание вправо */
+}
+
+/* Для кнопки "Cancel" в формах */
+.form-actions .cyber-button:not(.primary) {
+    background-color: rgba(160, 160, 192, 0.1);
+    border-color: var(--text-dim);
+    color: var(--text-dim);
+}
+
+/* Для primary кнопок в формах */
+.form-actions .cyber-button.primary {
+    background-color: rgba(0, 240, 255, 0.2);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
